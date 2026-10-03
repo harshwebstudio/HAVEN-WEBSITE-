@@ -25,25 +25,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       MOBILE NAVIGATION
-    ===================================================== */
+   MOBILE NAVIGATION
+===================================================== */
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector(".nav-menu");
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
 
-    if (menuToggle && navMenu) {
+if (menuToggle && navMenu) {
 
-        menuToggle.addEventListener("click", () => {
+    menuToggle.addEventListener("click", function () {
 
-            const isOpen = navMenu.classList.toggle("active");
+        navMenu.classList.toggle("active");
+        menuToggle.classList.toggle("active");
 
-            menuToggle.classList.toggle("active", isOpen);
+    });
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
+    const navLinks = navMenu.querySelectorAll("a");
+
+    navLinks.forEach(link => {
+
+        link.addEventListener("click", function () {
+
+            navMenu.classList.remove("active");
+            menuToggle.classList.remove("active");
+
         });
+
+    });
+}
 
 
         /* Close menu after clicking a link */
