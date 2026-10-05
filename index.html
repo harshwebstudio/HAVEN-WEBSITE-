@@ -1,84 +1,96 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
-<head><meta charset="UTF-8">
+<head>
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-      <meta name="google-site-verification" content="SWaTr5oWAYUSKK7v4XZaW3vuCX9-hfDmyhCZRqghUFU" />
+    <!-- BASIC META -->
+    <meta charset="UTF-8">
 
-<!-- PRIMARY SEO -->
-<title>Haven Websites — Modern Website Design for Businesses</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<meta name="description"
-      content="Haven Websites creates modern, responsive and premium websites for businesses, brands and creators across India.">
+    <meta name="google-site-verification"
+          content="SWaTr5oWAYUSKK7v4XZaW3vuCX9-hfDmyhCZRqghUFU">
 
-<meta name="keywords"
-      content="Haven Websites, web designer, website design, website development, business website, responsive website, premium website, web design India">
+    <!-- PRIMARY SEO -->
+    <title>Haven Websites — Modern Website Design for Businesses</title>
 
-<meta name="author"
-      content="Haven Websites">
+    <meta name="description"
+          content="Haven Websites creates modern, responsive and premium websites for businesses, brands and creators across India. Build your online presence and connect with more customers.">
 
-<meta name="robots"
-      content="index, follow">
+    <meta name="keywords"
+          content="Haven Websites, website design, web designer India, website development, business website, responsive website, premium website, modern website design">
 
-<!-- CANONICAL -->
-<link rel="canonical"
-      href="https://harshwebstudio.github.io/HAVEN-WEBSITE-/">
+    <meta name="author"
+          content="Haven Websites">
 
-<!-- FAVICON -->
-<link rel="icon"
-      type="image/jpeg"
-      href="images/logo.jpeg">
+    <meta name="robots"
+          content="index, follow">
 
-<!-- GOOGLE FONTS -->
-<link rel="preconnect"
-      href="https://fonts.googleapis.com">
+    <!-- CANONICAL -->
+    <link rel="canonical"
+          href="https://harshwebstudio.github.io/HAVEN-WEBSITE-/">
 
-<link rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet">
+    <!-- FAVICON -->
+    <link rel="icon"
+          type="image/jpeg"
+          href="images/logo.jpeg">
 
-<!-- CSS -->
-<link rel="stylesheet"
-      href="style.css">
 
-<!-- OPEN GRAPH -->
-<meta property="og:title"
-      content="Haven Websites — Modern Website Design for Businesses">
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<meta property="og:description"
-      content="Modern, responsive and premium websites for businesses, brands and creators by Haven Websites.">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-<meta property="og:type"
-      content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
 
-<meta property="og:url"
-      content="https://harshwebstudio.github.io/HAVEN-WEBSITE-/">
 
-<meta property="og:image"
-      content="https://harshwebstudio.github.io/HAVEN-WEBSITE-/images/logo.jpeg">
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="style.css">
 
-<meta property="og:site_name"
-      content="Haven Websites">
 
-<!-- TWITTER / X -->
-<meta name="twitter:card"
-      content="summary_large_image">
+    <!-- OPEN GRAPH -->
+    <meta property="og:title"
+          content="Haven Websites — Modern Website Design for Businesses">
 
-<meta name="twitter:title"
-      content="Haven Websites — Modern Website Design">
+    <meta property="og:description"
+          content="Modern, responsive and premium websites for businesses, brands and creators by Haven Websites.">
 
-<meta name="twitter:description"
-      content="Modern, responsive and premium websites for businesses, brands and creators.">
+    <meta property="og:type"
+          content="website">
 
-<meta name="twitter:image"
-      content="https://harshwebstudio.github.io/HAVEN-WEBSITE-/images/logo.jpeg">
+    <meta property="og:url"
+          content="https://harshwebstudio.github.io/HAVEN-WEBSITE-/">
+
+    <meta property="og:image"
+          content="https://harshwebstudio.github.io/HAVEN-WEBSITE-/images/logo.jpeg">
+
+    <meta property="og:site_name"
+          content="Haven Websites">
+
+
+    <!-- TWITTER / X -->
+    <meta name="twitter:card"
+          content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="Haven Websites — Modern Website Design">
+
+    <meta name="twitter:description"
+          content="Modern, responsive and premium websites for businesses, brands and creators.">
+
+    <meta name="twitter:image"
+          content="https://harshwebstudio.github.io/HAVEN-WEBSITE-/images/logo.jpeg">
 
 </head>
+
 
 <body>
 
@@ -91,13 +103,17 @@
 
     <div class="nav-container">
 
+
         <!-- LOGO -->
 
         <a href="#home"
-           class="logo">
+           class="logo"
+           aria-label="Haven Websites Home">
 
             <img src="images/logo.jpeg"
-                 alt="Haven Website Logo">
+                 alt="Haven Websites logo"
+                 width="50"
+                 height="50">
 
             <span>HAVEN WEBSITE</span>
 
@@ -110,7 +126,8 @@
                 id="menuToggle"
                 type="button"
                 aria-label="Open navigation menu"
-                aria-expanded="false">
+                aria-expanded="false"
+                aria-controls="navMenu">
 
             <span></span>
             <span></span>
@@ -122,19 +139,32 @@
         <!-- NAVIGATION -->
 
         <nav class="nav-menu"
-             id="navMenu">
+             id="navMenu"
+             aria-label="Main navigation">
 
-            <a href="#home">Home</a>
+            <a href="#home">
+                Home
+            </a>
 
-            <a href="#about">About</a>
+            <a href="#about">
+                About
+            </a>
 
-            <a href="#services">Services</a>
+            <a href="#services">
+                Services
+            </a>
 
-            <a href="#projects">Projects</a>
+            <a href="#projects">
+                Projects
+            </a>
 
-            <a href="#pricing">Pricing</a>
+            <a href="#pricing">
+                Pricing
+            </a>
 
-            <a href="#contact">Contact</a>
+            <a href="#contact">
+                Contact
+            </a>
 
             <a href="#contact"
                class="nav-cta">
@@ -149,11 +179,143 @@
 
 
 <!-- =========================================
-     MAIN
+     MAIN CONTENT
 ========================================= -->
 
 <main>
 
+
+<!-- =========================================
+     HERO SECTION
+========================================= -->
+
+<section class="hero"
+         id="home"
+         aria-labelledby="hero-title">
+
+    <div class="hero-container">
+
+
+        <!-- HERO CONTENT -->
+
+        <div class="hero-content">
+
+
+            <div class="hero-badge">
+                Available for new projects
+            </div>
+
+
+            <!-- PRIMARY SEO HEADING -->
+
+            <h1 id="hero-title">
+                Modern Website Design
+                <span>for Modern Businesses</span>
+            </h1>
+
+
+            <!-- SEO INTRODUCTION -->
+
+            <p class="hero-text">
+                Haven Websites creates modern, responsive and premium
+                websites for businesses, brands and creators across India.
+                Build your online presence and connect with more customers.
+            </p>
+
+
+            <!-- HERO ACTIONS -->
+
+            <div class="hero-buttons">
+
+                <a href="#pricing"
+                   class="btn-primary"
+                   aria-label="View Haven Websites pricing">
+                    View Pricing →
+                </a>
+
+
+                <a href="#projects"
+                   class="btn-secondary"
+                   aria-label="View Haven Websites projects">
+                    View Our Projects
+                </a>
+
+            </div>
+
+
+            <!-- BUSINESS STATS -->
+
+            <div class="hero-stats">
+
+
+                <div class="stat">
+
+                    <h2>20+</h2>
+
+                    <p>
+                        Projects
+                    </p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <h2>100%</h2>
+
+                    <p>
+                        Responsive
+                    </p>
+
+                </div>
+
+
+                <div class="stat">
+
+                    <h2>24/7</h2>
+
+                    <p>
+                        Online Support
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual">
+
+            <div class="hero-brand-card">
+
+                <img src="images/logo.jpeg"
+                     alt="Haven Websites modern web design agency logo"
+                     width="300"
+                     height="300"
+                     loading="eager">
+
+                <h2>
+                    HAVEN WEBSITES
+                </h2>
+
+                <p>
+                    Modern Websites for Modern Businesses
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
 
 <!-- =========================================
      HERO
