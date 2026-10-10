@@ -1,261 +1,354 @@
+/* =========================================================
+   HAVEN WEBSITES — PREMIUM JAVASCRIPT
+   ========================================================= */
 
-/* ========================================
-   HAVEN WEBSITES
-   MAIN JAVASCRIPT — PART 1/3
-======================================== */
+(() => {
+  "use strict";
 
-(function () {
-    "use strict";
+  /* ---------------------------------------------------------
+     ELEMENTS
+     --------------------------------------------------------- */
 
-    /* ------------------------------------
-       ELEMENTS
-    ------------------------------------ */
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navMenu = document.querySelector(".nav-links");
+  const navLinks = document.querySelectorAll(".nav-links a");
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector(".nav-links");
-    const navLinks = document.querySelectorAll(".nav-links a");
+  const contactForm = document.getElementById("contactForm");
+  const formNote = document.getElementById("formNote");
 
-    const contactForm = document.getElementById("contactForm");
-    const formNote = document.getElementById("formNote");
+  const serviceSelect = document.getElementById("service");
+  const planSelect = document.getElementById("plan");
+  const detailsField = document.getElementById("details");
 
-    const serviceSelect = document.getElementById("service");
-    const detailsField = document.getElementById("details");
+  const nameField = document.getElementById("name");
+  const businessField = document.getElementById("business");
+  const emailField = document.getElementById("email");
+  const budgetField = document.getElementById("budget");
 
-    /* ------------------------------------
-       MOBILE NAVIGATION
-    ------------------------------------ */
+  const footerYear = document.getElementById("footerYear");
 
-    function closeMenu() {
-        if (!menuToggle || !navMenu) return;
 
-        navMenu.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation menu");
+  /* ---------------------------------------------------------
+     MOBILE NAVIGATION
+     --------------------------------------------------------- */
+
+  const closeMenu = () => {
+    if (!menuToggle || !navMenu) return;
+
+    navMenu.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation menu");
+  };
+
+  const openMenu = () => {
+    if (!menuToggle || !navMenu) return;
+
+    navMenu.classList.add("open");
+    menuToggle.setAttribute("aria-expanded", "true");
+    menuToggle.setAttribute("aria-label", "Close navigation menu");
+  };
+
+  const toggleMenu = () => {
+    if (!navMenu) return;
+
+    if (navMenu.classList.contains("open")) {
+      closeMenu();
+    } else {
+      openMenu();
     }
+  };
 
-    function openMenu() {
-        if (!menuToggle || !navMenu) return;
+  if (menuToggle && navMenu) {
+    navMenu.id = navMenu.id || "navMenu";
 
-        navMenu.classList.add("open");
-        menuToggle.setAttribute("aria-expanded", "true");
-        menuToggle.setAttribute("aria-label", "Close navigation menu");
-    }
+    menuToggle.setAttribute("aria-controls", navMenu.id);
+    menuToggle.setAttribute("aria-expanded", "false");
 
-    if (menuToggle && navMenu) {
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open navigation menu");
+    menuToggle.addEventListener("click", toggleMenu);
 
-        menuToggle.addEventListener("click", function () {
-            const isOpen = navMenu.classList.contains("open");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        closeMenu();
 
-            if (isOpen) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        });
+        const href = link.getAttribute("href");
 
-        navLinks.forEach(function (link) {
-            link.addEventListener("click", closeMenu);
-        });
+        if (href && href.startsWith("#")) {
+          const target = document.querySelector(href);
 
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape") {
-                closeMenu();
-            }
-        });
+          if (target) {
+            target.setAttribute("tabindex", "-1");
 
-        document.addEventListener("click", function (event) {
-            const clickedInsideMenu = navMenu.contains(event.target);
-            const clickedToggle = menuToggle.contains(event.target);
-
-            if (!clickedInsideMenu && !clickedToggle) {
-                closeMenu();
-            }
-        });
-    }
-
-    /* ------------------------------------
-       CLOSE MENU WHEN SCREEN RESIZES
-    ------------------------------------ */
-
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 680) {
-            closeMenu();
+            setTimeout(() => {
+              target.focus({ preventScroll: true });
+            }, 300);
+          }
         }
+      });
     });
 
-    /* ------------------------------------
-       NAVIGATION LINKS
-    ------------------------------------ */
-
-    navLinks.forEach(function (link) {
-        link.addEventListener("click", function () {
-            const targetId = link.getAttribute("href");
-
-            if (targetId && targetId.startsWith("#")) {
-                const targetSection = document.querySelector(targetId);
-
-                if (targetSection) {
-                    targetSection.setAttribute("tabindex", "-1");
-                }
-            }
-        });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
     });
 
-    /* ========================================
-       PART 2/3 CONTINUES BELOW
-    ======================================== */
- 
-    /* ------------------------------------
-       SERVICE ENQUIRY BUTTONS
-    ------------------------------------ */
-
-    const serviceButtons = document.querySelectorAll("[data-service]");
-
-    serviceButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            const selectedService = button.getAttribute("data-service");
-
-            if (serviceSelect && selectedService) {
-                const matchingOption = Array.from(
-                    serviceSelect.options
-                ).find(function (option) {
-                    return option.value === selectedService;
-                });
-
-                if (matchingOption) {
-                    serviceSelect.value = selectedService;
-                }
-            }
-        });
+    document.addEventListener("click", (event) => {
+      if (
+        navMenu.classList.contains("open") &&
+        !navMenu.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMenu();
+      }
     });
 
-    /* ------------------------------------
-       PRICING PLAN BUTTONS
-    ------------------------------------ */
-
-    const planButtons = document.querySelectorAll("[data-plan]");
-
-    planButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            const planName = button.getAttribute("data-plan");
-
-            if (detailsField && planName) {
-                detailsField.value =
-                    "I'm interested in the " +
-                    planName +
-                    " package. Please share the next steps.";
-            }
-
-            if (serviceSelect) {
-                const planText = (planName || "").toLowerCase();
-
-                if (planText.includes("e-commerce")) {
-                    serviceSelect.value = "E-commerce website";
-                } else {
-                    serviceSelect.value = "Business website";
-                }
-            }
-        });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 680) {
+        closeMenu();
+      }
     });
+  }
 
-    /* ------------------------------------
-       CONTACT FORM → WHATSAPP
-    ------------------------------------ */
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", function (event) {
-            event.preventDefault();
+  /* ---------------------------------------------------------
+     SERVICE ENQUIRY BUTTONS
+     --------------------------------------------------------- */
 
-            if (!contactForm.reportValidity()) {
-                return;
-            }
+  const serviceButtons = document.querySelectorAll("[data-service]");
 
-            const nameField = document.getElementById("name");
-            const businessField = document.getElementById("business");
-            const budgetField = document.getElementById("budget");
+  serviceButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedService = button.getAttribute("data-service");
 
-            const customerName = nameField
-                ? nameField.value.trim()
-                : "";
+      if (serviceSelect && selectedService) {
+        const matchingOption = [...serviceSelect.options].find(
+          (option) =>
+            option.value.toLowerCase() === selectedService.toLowerCase()
+        );
 
-            const businessName = businessField
-                ? businessField.value.trim()
-                : "";
-
-            const selectedService = serviceSelect
-                ? serviceSelect.value
-                : "";
-
-            const selectedBudget = budgetField
-                ? budgetField.value
-                : "";
-
-            const projectDetails = detailsField
-                ? detailsField.value.trim()
-                : "";
-
-            const message = [
-                "Hello Haven Websites!",
-                "",
-                "I would like to enquire about website design.",
-                "",
-                "Name: " + customerName,
-                "Business Name: " + (businessName || "Not provided"),
-                "Service: " + (selectedService || "Not selected"),
-                "Budget: " + (selectedBudget || "Not selected"),
-                "Project Details: " + (projectDetails || "Not provided"),
-                "",
-                "Please contact me with the next steps."
-            ].join("\n");
-
-            const whatsappNumber = "919987475783";
-
-            const whatsappURL =
-                "https://wa.me/" +
-                whatsappNumber +
-                "?text=" +
-                encodeURIComponent(message);
-
-            if (formNote) {
-                formNote.textContent =
-                    "WhatsApp is opening with your enquiry. Review the message and press Send.";
-            }
-
-            window.location.href = whatsappURL;
-        });
-    }
-
-    /* ========================================
-       PART 3/3 CONTINUES BELOW
-    ======================================== */
-
- 
-    /* ------------------------------------
-       FOOTER COPYRIGHT YEAR
-    ------------------------------------ */
-
-    const footerYear = document.getElementById("footerYear");
-
-    if (footerYear) {
-        footerYear.textContent = new Date().getFullYear();
-    }
-
-    /* ------------------------------------
-       ACCESSIBLE MENU STATE
-    ------------------------------------ */
-
-    if (menuToggle && navMenu) {
-        menuToggle.setAttribute("aria-controls", navMenu.id || "navMenu");
-
-        if (!navMenu.id) {
-            navMenu.id = "navMenu";
+        if (matchingOption) {
+          serviceSelect.value = matchingOption.value;
+        } else {
+          serviceSelect.value = selectedService;
         }
+      }
+
+      const contactSection = document.querySelector("#contact");
+
+      if (contactSection) {
+        contactSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+      if (detailsField && selectedService) {
+        detailsField.focus();
+      }
+    });
+  });
+
+
+  /* ---------------------------------------------------------
+     PRICING PLAN BUTTONS
+     --------------------------------------------------------- */
+
+  const planButtons = document.querySelectorAll("[data-plan]");
+
+  planButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const selectedPlan = button.getAttribute("data-plan");
+
+      if (planSelect && selectedPlan) {
+        const matchingOption = [...planSelect.options].find(
+          (option) =>
+            option.value.toLowerCase() === selectedPlan.toLowerCase()
+        );
+
+        if (matchingOption) {
+          planSelect.value = matchingOption.value;
+        }
+      }
+
+      /*
+       * Automatically select a suitable service
+       */
+      if (serviceSelect && selectedPlan) {
+        if (selectedPlan.toLowerCase().includes("e-commerce")) {
+          serviceSelect.value = "E-commerce website";
+        } else if (
+          serviceSelect.value === "" ||
+          !serviceSelect.value
+        ) {
+          serviceSelect.value = "Business website";
+        }
+      }
+
+      /*
+       * Add plan information to project details
+       */
+      if (detailsField && selectedPlan) {
+        detailsField.value =
+          `I'm interested in the ${selectedPlan} package. ` +
+          `Please share the next steps.`;
+      }
+
+      const contactSection = document.querySelector("#contact");
+
+      if (contactSection) {
+        contactSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+      if (planSelect) {
+        setTimeout(() => {
+          planSelect.focus();
+        }, 500);
+      }
+    });
+  });
+
+
+  /* ---------------------------------------------------------
+     FORM SUBMISSION
+     --------------------------------------------------------- */
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      /*
+       * Browser validation
+       */
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+
+        if (formNote) {
+          formNote.textContent =
+            "Please complete the required fields before continuing.";
+        }
+
+        return;
+      }
+
+      /*
+       * Get form values
+       */
+      const name = nameField?.value.trim() || "";
+      const business = businessField?.value.trim() || "";
+      const email = emailField?.value.trim() || "";
+      const service = serviceSelect?.value.trim() || "";
+      const plan = planSelect?.value.trim() || "";
+      const budget = budgetField?.value.trim() || "";
+      const details = detailsField?.value.trim() || "";
+
+      /*
+       * WhatsApp message
+       */
+      const message = [
+        "Hello Haven Websites! 👋",
+        "",
+        "I would like to discuss a website project.",
+        "",
+        `Name: ${name}`,
+        `Business: ${business}`,
+        `Email: ${email}`,
+        `Service: ${service}`,
+        `Plan: ${plan}`,
+        `Budget: ${budget}`,
+        "",
+        "Project Details:",
+        details,
+        "",
+        "Sent from the Haven Websites website."
+      ].join("\n");
+
+      /*
+       * Haven Websites WhatsApp number
+       */
+      const whatsappNumber = "919987475783";
+
+      const whatsappURL =
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      /*
+       * User feedback
+       */
+      if (formNote) {
+        formNote.textContent =
+          "WhatsApp is opening with your enquiry. Review the message and press Send.";
+      }
+
+      /*
+       * Open WhatsApp
+       */
+      window.open(whatsappURL, "_blank", "noopener,noreferrer");
+    });
+  }
+
+
+  /* ---------------------------------------------------------
+     FOOTER YEAR
+     --------------------------------------------------------- */
+
+  if (footerYear) {
+    footerYear.textContent = new Date().getFullYear();
+  }
+
+
+  /* ---------------------------------------------------------
+     ACCESSIBILITY
+     --------------------------------------------------------- */
+
+  if (menuToggle && navMenu) {
+    menuToggle.setAttribute(
+      "aria-label",
+      "Open navigation menu"
+    );
+
+    if (!navMenu.id) {
+      navMenu.id = "navMenu";
     }
 
-    /* ------------------------------------
-       END OF HAVEN WEBSITES JAVASCRIPT
-    ------------------------------------ */
+    menuToggle.setAttribute(
+      "aria-controls",
+      navMenu.id
+    );
+  }
+
+
+  /* ---------------------------------------------------------
+     SMOOTH INTERNAL LINKS
+     --------------------------------------------------------- */
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = document.querySelector(targetId);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    });
+  });
+
+
+  /* ---------------------------------------------------------
+     PREVENT FORM NOTE FROM STAYING HIDDEN
+     --------------------------------------------------------- */
+
+  if (formNote) {
+    formNote.setAttribute("aria-live", "polite");
+  }
 
 })();
