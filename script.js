@@ -148,67 +148,40 @@
     });
   });
 
+/* ---------------------------------------------------------
+   PRICING PLAN BUTTONS — WHATSAPP ENQUIRY
+   --------------------------------------------------------- */
 
-  /* ---------------------------------------------------------
-     PRICING PLAN BUTTONS
-     --------------------------------------------------------- */
+const planButtons = document.querySelectorAll("[data-plan]");
 
-  const planButtons = document.querySelectorAll("[data-plan]");
+planButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
 
-  planButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const selectedPlan = button.getAttribute("data-plan");
+    const selectedPlan =
+      button.getAttribute("data-plan") || "Website package";
 
-      if (planSelect && selectedPlan) {
-        const matchingOption = [...planSelect.options].find(
-          (option) =>
-            option.value.toLowerCase() === selectedPlan.toLowerCase()
-        );
+    const whatsappNumber = "919987475783";
 
-        if (matchingOption) {
-          planSelect.value = matchingOption.value;
-        }
-      }
+    const message = [
+      "Hello Haven Websites! 👋",
+      "",
+      "I'm interested in one of your website packages.",
+      "",
+      `Selected Package: ${selectedPlan}`,
+      "",
+      "Please share the details, what's included, and the next steps.",
+      "",
+      "Thank you!"
+    ].join("\n");
 
-      /*
-       * Automatically select a suitable service
-       */
-      if (serviceSelect && selectedPlan) {
-        if (selectedPlan.toLowerCase().includes("e-commerce")) {
-          serviceSelect.value = "E-commerce website";
-        } else if (
-          serviceSelect.value === "" ||
-          !serviceSelect.value
-        ) {
-          serviceSelect.value = "Business website";
-        }
-      }
+    const whatsappURL =
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-      /*
-       * Add plan information to project details
-       */
-      if (detailsField && selectedPlan) {
-        detailsField.value =
-          `I'm interested in the ${selectedPlan} package. ` +
-          `Please share the next steps.`;
-      }
-
-      const contactSection = document.querySelector("#contact");
-
-      if (contactSection) {
-        contactSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
-
-      if (planSelect) {
-        setTimeout(() => {
-          planSelect.focus();
-        }, 500);
-      }
-    });
+    window.open(whatsappURL, "_blank", "noopener,noreferrer");
   });
+});
+          
 
 
   /* ---------------------------------------------------------
