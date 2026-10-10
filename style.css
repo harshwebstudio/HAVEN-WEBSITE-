@@ -1,10 +1,10 @@
+
 /* =========================================
    HAVEN WEBSITES
-   CLEAN PROFESSIONAL DESIGN
    CSS PART 1 OF 3
+   BASE + HEADER + HERO
+   No animations or transitions
 ========================================= */
-
-/* GOOGLE FONTS ARE LOADED IN HTML */
 
 /* 1. ROOT VARIABLES */
 
@@ -12,7 +12,6 @@
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
   --primary-light: #eff6ff;
-
   --accent: #06b6d4;
 
   --heading: #111827;
@@ -23,7 +22,6 @@
   --surface: #f8fafc;
   --surface-blue: #f1f5f9;
   --border: #e5e7eb;
-
   --success: #15803d;
 
   --font-main: "DM Sans", sans-serif;
@@ -39,7 +37,6 @@
   --shadow-md: 0 12px 32px rgba(15, 23, 42, 0.07);
 }
 
-
 /* 2. RESET */
 
 * {
@@ -54,12 +51,13 @@ html {
 }
 
 body {
-  font-family: var(--font-main);
+  min-width: 320px;
+  overflow-x: hidden;
   background: var(--white);
   color: var(--text);
+  font-family: var(--font-main);
   font-size: 16px;
   line-height: 1.7;
-  overflow-x: hidden;
 }
 
 body,
@@ -104,8 +102,8 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-heading);
   color: var(--heading);
+  font-family: var(--font-heading);
   line-height: 1.2;
   letter-spacing: -0.035em;
 }
@@ -114,6 +112,12 @@ p {
   color: var(--text);
 }
 
+input,
+select,
+textarea,
+button {
+  max-width: 100%;
+}
 
 /* 3. ACCESSIBILITY */
 
@@ -122,24 +126,29 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(37, 99, 235, 0.35);
+  outline: 3px solid rgba(37, 99, 235, 0.45);
   outline-offset: 3px;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
 
 /* 4. REUSABLE LAYOUT */
 
 .container {
-  width: min(
-    var(--container),
-    calc(100% - 48px)
-  );
+  width: min(var(--container), calc(100% - 48px));
   margin-inline: auto;
 }
 
 .section {
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-block: 100px;
 }
 
 .section-muted {
@@ -150,7 +159,6 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-
   color: var(--primary);
   font-size: 12px;
   font-weight: 700;
@@ -164,6 +172,7 @@ textarea:focus-visible {
   display: block;
   width: 22px;
   height: 2px;
+  flex-shrink: 0;
   background: var(--primary);
 }
 
@@ -188,11 +197,10 @@ textarea:focus-visible {
 
 .section-heading > p {
   max-width: 360px;
+  color: var(--muted);
   font-size: 15px;
   line-height: 1.8;
-  color: var(--muted);
 }
-
 
 /* 5. BUTTONS */
 
@@ -212,7 +220,7 @@ textarea:focus-visible {
   font-weight: 700;
   line-height: 1.4;
   text-align: center;
-
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -251,10 +259,10 @@ textarea:focus-visible {
 }
 
 .button-project {
-  width: 100%;
+  display: flex;
+  width: calc(100% - 40px);
   min-height: 44px;
-  margin-top: 18px;
-
+  margin: 0 20px 20px;
   background: var(--white);
   color: var(--heading);
   border-color: var(--border);
@@ -265,27 +273,24 @@ textarea:focus-visible {
   border-color: var(--primary);
 }
 
-
 /* 6. HEADER */
 
 .site-header {
   position: relative;
   z-index: 100;
-
   width: 100%;
-  background: rgba(255, 255, 255, 0.98);
+  background: var(--white);
   border-bottom: 1px solid var(--border);
 }
 
 .navbar {
+  position: relative;
   min-height: 82px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 30px;
 }
-
 
 /* BRAND */
 
@@ -300,15 +305,11 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 43px;
   height: 43px;
-
   border-radius: 12px;
-
   background: var(--primary);
   color: var(--white);
-
   font-family: var(--font-heading);
   font-size: 25px;
   font-weight: 800;
@@ -331,15 +332,13 @@ textarea:focus-visible {
 
 .brand-text small {
   margin-top: 4px;
-
   color: var(--muted);
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.19em;
 }
 
-
-/* NAVIGATION */
+/* DESKTOP NAVIGATION */
 
 .nav-links {
   display: flex;
@@ -349,7 +348,6 @@ textarea:focus-visible {
 }
 
 .nav-links > a:not(.button) {
-  position: relative;
   color: #475569;
   font-size: 13px;
   font-weight: 600;
@@ -365,68 +363,60 @@ textarea:focus-visible {
   white-space: nowrap;
 }
 
-
 /* MOBILE MENU BUTTON */
 
 .menu-toggle {
   display: none;
-
   width: 44px;
   height: 44px;
   padding: 11px;
-
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
-
   border: 1px solid var(--border);
   border-radius: 10px;
-
   background: var(--white);
+  color: var(--heading);
 }
 
 .menu-toggle span {
   display: block;
   width: 19px;
   height: 2px;
-
   border-radius: 2px;
   background: var(--heading);
 }
-
 
 /* 7. HERO SECTION */
 
 .hero {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   align-items: center;
-  gap: 65px;
-
+  gap: 50px;
   min-height: 610px;
-  padding-top: 85px;
-  padding-bottom: 85px;
+  padding-block: 85px;
 }
 
-.hero-content {
+.hero-content,
+.hero-visual {
   min-width: 0;
 }
 
 .hero-content h1 {
   max-width: 620px;
   margin-top: 22px;
-
   font-size: clamp(42px, 5.2vw, 64px);
   font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.065em;
+  overflow-wrap: anywhere;
 }
 
 .hero-description {
   max-width: 520px;
   margin-top: 23px;
-
   color: var(--muted);
   font-size: 16px;
   line-height: 1.9;
@@ -437,10 +427,8 @@ textarea:focus-visible {
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-
   margin-top: 30px;
 }
-
 
 /* HERO STATS */
 
@@ -448,15 +436,14 @@ textarea:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
-
   margin-top: 48px;
   padding-top: 25px;
-
   border-top: 1px solid var(--border);
 }
 
 .stat-item {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   gap: 5px;
 }
@@ -473,22 +460,17 @@ textarea:focus-visible {
   line-height: 1.6;
 }
 
-
 /* STATIC WEBSITE PREVIEW */
 
 .hero-visual {
-  min-width: 0;
   padding: 24px;
-
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-
   background: #f8fafc;
 }
 
 .visual-label {
   margin-bottom: 17px;
-
   color: var(--muted);
   font-size: 10px;
   font-weight: 700;
@@ -497,10 +479,8 @@ textarea:focus-visible {
 
 .mock-browser {
   overflow: hidden;
-
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-
   background: var(--white);
   box-shadow: var(--shadow-md);
 }
@@ -509,12 +489,10 @@ textarea:focus-visible {
   display: flex;
   align-items: center;
   gap: 13px;
-
   min-height: 42px;
-  padding: 0 13px;
-
+  padding-inline: 13px;
   border-bottom: 1px solid var(--border);
-  background: #ffffff;
+  background: var(--white);
 }
 
 .browser-dots {
@@ -531,20 +509,19 @@ textarea:focus-visible {
 
 .browser-address {
   flex: 1;
+  min-width: 0;
   padding: 5px 9px;
-
   border-radius: 5px;
   background: #f1f5f9;
-
   color: var(--muted);
   font-size: 9px;
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
 .browser-content {
   min-height: 320px;
   padding: 28px 24px;
-
   background: var(--white);
 }
 
@@ -560,14 +537,12 @@ textarea:focus-visible {
   width: 100%;
   height: 1px;
   margin-top: 14px;
-
   background: var(--border);
 }
 
 .mock-heading {
   max-width: 300px;
   margin-top: 29px;
-
   color: var(--heading);
   font-size: clamp(23px, 3vw, 32px);
   font-weight: 800;
@@ -578,7 +553,6 @@ textarea:focus-visible {
 .mock-copy {
   max-width: 260px;
   margin-top: 12px;
-
   color: var(--muted);
   font-size: 10px;
   line-height: 1.8;
@@ -588,15 +562,12 @@ textarea:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   min-height: 31px;
   margin-top: 17px;
-  padding: 0 13px;
-
+  padding-inline: 13px;
   border-radius: 5px;
   background: var(--primary);
   color: var(--white);
-
   font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -606,24 +577,22 @@ textarea:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 9px;
-
   margin-top: 25px;
 }
 
 .mock-card {
+  min-width: 0;
   min-height: 70px;
   padding: 10px 8px;
-
   border: 1px solid var(--border);
   border-radius: 6px;
-  background: #ffffff;
+  background: var(--white);
 }
 
 .mock-card span {
   display: block;
   width: 23px;
   height: 20px;
-
   border-radius: 4px;
   background: var(--primary-light);
 }
@@ -633,7 +602,6 @@ textarea:focus-visible {
   width: 90%;
   height: 3px;
   margin-top: 7px;
-
   border-radius: 3px;
   background: #e2e8f0;
 }
@@ -644,737 +612,956 @@ textarea:focus-visible {
 
 .visual-caption {
   margin-top: 17px;
-
   color: var(--muted);
   font-size: 11px;
   text-align: center;
-}
-
-/* ========================================
-   ABOUT SECTION
-======================================== */
-
-.about-layout {
-    display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 64px;
-    align-items: start;
-}
-
-.about-heading {
-    margin-bottom: 0;
-}
-
-.about-copy p {
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.9;
-    margin-bottom: 18px;
-}
-
-.text-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-    color: var(--primary);
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.text-link:hover {
-    color: var(--primary-dark);
-    text-decoration: underline;
-}
-
-
-/* ========================================
-   SERVICES SECTION
-======================================== */
-
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-    margin-top: 42px;
-}
-
-.service-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 30px;
-    box-shadow: var(--shadow-sm);
-}
-
-.service-number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    margin-bottom: 22px;
-    border-radius: 12px;
-    background: var(--primary-light);
-    color: var(--primary);
-    font-size: 14px;
-    font-weight: 800;
-}
-
-.service-card h3 {
-    color: var(--heading);
-    font-family: var(--font-heading);
-    font-size: 21px;
-    line-height: 1.4;
-    margin-bottom: 12px;
-}
-
-.service-card p {
-    color: var(--text);
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
-.service-card .text-link {
-    margin-top: 0;
-}
-
-
-/* ========================================
-   PROJECTS SECTION
-======================================== */
-
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
-    margin-top: 42px;
-}
-
-.project-card {
-    min-width: 0;
-    overflow: hidden;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-}
-
-.project-preview {
-    min-height: 190px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    overflow: hidden;
-}
-
-.preview-alpha {
-    background: #eaf2ff;
-    color: #173b75;
-}
-
-.preview-form {
-    background: #f0fdf4;
-    color: #14532d;
-}
-
-.preview-medical {
-    background: #effbff;
-    color: #075985;
-}
-
-.preview-finance {
-    background: #eef2ff;
-    color: #312e81;
-}
-
-.preview-velora {
-    background: #fdf2f8;
-    color: #831843;
-}
-
-.preview-destini {
-    background: #f5f3ff;
-    color: #5b21b6;
-}
-
-.preview-category {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
-.preview-index {
-    align-self: flex-end;
-    font-family: var(--font-heading);
-    font-size: 42px;
-    font-weight: 800;
-    line-height: 1;
-    opacity: 0.25;
-}
-
-.preview-symbol {
-    font-family: var(--font-heading);
-    font-size: 28px;
-    font-weight: 800;
-    line-height: 1.3;
-    overflow-wrap: anywhere;
-}
-
-.project-content {
-    padding: 24px;
-}
-
-.project-content h3 {
-    color: var(--heading);
-    font-family: var(--font-heading);
-    font-size: 19px;
-    line-height: 1.45;
-    margin-bottom: 10px;
-}
-
-.project-content p {
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 18px;
-}
-
-.button-project {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 42px;
-    padding: 10px 15px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    color: var(--heading);
-    font-size: 13px;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.button-project:hover {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-
-/* ========================================
-   TABLET LAYOUT
-======================================== */
-
-@media (max-width: 960px) {
-    .about-layout {
-        gap: 36px;
-    }
-
-    .project-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
    }
 
 
-/* ========================================
-   PRICING SECTION
-======================================== */
+/* =========================================
+   HAVEN WEBSITES
+   CSS PART 2 OF 3
+   ABOUT + SERVICES + PROJECTS + PRICING
+========================================= */
+
+/* 8. ABOUT SECTION */
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.about-heading {
+  min-width: 0;
+}
+
+.about-copy {
+  min-width: 0;
+}
+
+.about-copy p {
+  margin-bottom: 18px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.text-link:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* 9. SERVICES SECTION */
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 42px;
+}
+
+.service-card {
+  min-width: 0;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.service-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 22px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.service-card h3 {
+  margin-bottom: 12px;
+  color: var(--heading);
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+.service-card p {
+  margin-bottom: 20px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.service-card > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  color: var(--primary);
+  font-size: 14px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.service-card > a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+/* 10. PROJECTS SECTION */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 42px;
+}
+
+.project-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.project-preview {
+  display: flex;
+  min-width: 0;
+  min-height: 190px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+}
+
+.project-preview strong {
+  font-family: var(--font-heading);
+  font-size: clamp(19px, 2.2vw, 27px);
+  font-weight: 800;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.project-preview small {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.preview-alpha {
+  background: #eaf2ff;
+  color: #173b75;
+}
+
+.preview-form {
+  background: #f0fdf4;
+  color: #14532d;
+}
+
+.preview-medical {
+  background: #effbff;
+  color: #075985;
+}
+
+.preview-finance {
+  background: #eef2ff;
+  color: #312e81;
+}
+
+.preview-velora {
+  background: #fdf2f8;
+  color: #831843;
+}
+
+.preview-destini {
+  background: #f5f3ff;
+  color: #5b21b6;
+}
+
+.preview-category {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.preview-index {
+  align-self: flex-end;
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1;
+  opacity: 0.45;
+}
+
+.preview-symbol {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.project-content {
+  flex: 1;
+  padding: 22px 20px 10px;
+}
+
+.project-content h3 {
+  margin-bottom: 8px;
+  color: var(--heading);
+  font-size: 18px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.project-content p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* 11. PRICING SECTION */
 
 .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-    margin-top: 42px;
-    align-items: stretch;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 22px;
+  margin-top: 42px;
 }
 
 .price-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 30px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
 }
 
 .price-card-featured {
-    border: 2px solid var(--primary);
-    background: #f8fbff;
+  border: 2px solid var(--primary);
+  background: #f8fbff;
 }
 
 .price-label {
-    display: inline-block;
-    margin-bottom: 16px;
-    padding: 7px 11px;
-    border-radius: 6px;
-    background: var(--primary-light);
-    color: var(--primary-dark);
-    font-size: 12px;
-    font-weight: 800;
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 7px 11px;
+  border-radius: 6px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .price-card h3 {
-    margin-bottom: 10px;
-    color: var(--heading);
-    font-family: var(--font-heading);
-    font-size: 23px;
+  margin-bottom: 10px;
+  color: var(--heading);
+  font-size: 23px;
+  line-height: 1.35;
+}
+
+.price-card > p {
+  margin-bottom: 20px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 .price {
-    margin-bottom: 18px;
-    color: var(--heading);
-    font-family: var(--font-heading);
-    font-size: 36px;
-    font-weight: 800;
-    line-height: 1.3;
+  margin-bottom: 18px;
+  color: var(--heading);
+  font-family: var(--font-heading);
+  font-size: clamp(30px, 4vw, 36px);
+  font-weight: 800;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
-.price-card p {
-    margin-bottom: 20px;
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.8;
+.price small {
+  color: var(--muted);
+  font-family: var(--font-main);
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .price-card ul {
-    width: 100%;
-    padding: 0;
-    margin: 0 0 26px;
-    list-style: none;
+  width: 100%;
+  margin-bottom: 26px;
 }
 
 .price-card li {
-    position: relative;
-    padding: 10px 0 10px 25px;
-    border-bottom: 1px solid #edf0f4;
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.6;
+  position: relative;
+  padding: 10px 0 10px 25px;
+  border-bottom: 1px solid #edf0f4;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .price-card li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    top: 10px;
-    color: var(--success);
-    font-weight: 800;
+  content: "✓";
+  position: absolute;
+  top: 10px;
+  left: 0;
+  color: var(--success);
+  font-weight: 800;
 }
 
 .plan-button {
-    width: 100%;
-    margin-top: auto;
+  width: 100%;
+  margin-top: auto;
 }
 
 .pricing-note {
-    margin-top: 28px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.8;
-    text-align: center;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: center;
 }
 
 
-/* ========================================
-   CONTACT SECTION
-======================================== */
+/* =========================================
+   HAVEN WEBSITES
+   CSS PART 3 OF 3
+   CONTACT + CTA + VISITORS + FOOTER
+   + RESPONSIVE LAYOUT
+========================================= */
+
+/* 12. CONTACT SECTION */
 
 .contact-layout {
-    display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 48px;
-    align-items: start;
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+  gap: 48px;
+}
+
+.contact-copy,
+.contact-form {
+  min-width: 0;
+}
+
+.contact-copy > h2 {
+  margin-top: 16px;
+  margin-bottom: 18px;
+  font-size: clamp(30px, 4vw, 42px);
 }
 
 .contact-copy > p {
-    margin-bottom: 28px;
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.9;
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.9;
 }
 
-.contact-method {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 22px;
+/* RECTANGULAR CONTACT BUTTONS */
+
+.contact-action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 26px 0;
 }
 
-.contact-icon {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: var(--primary-light);
-    color: var(--primary);
-    font-size: 18px;
-    font-weight: 800;
+.contact-action {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  min-height: 76px;
+  padding: 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
-.contact-method h3 {
-    margin-bottom: 5px;
-    color: var(--heading);
-    font-size: 15px;
+.contact-action > span:last-child {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
 }
 
-.contact-method a,
-.contact-method p {
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
-    text-decoration: none;
+.contact-action strong {
+  display: block;
+  font-size: 13px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
-.contact-method a:hover {
-    color: var(--primary);
-    text-decoration: underline;
+.contact-action small {
+  display: block;
+  color: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.8;
 }
+
+.action-icon {
+  display: flex;
+  flex: 0 0 36px;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.contact-action.button-primary .action-icon,
+.contact-action.button-dark .action-icon {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.contact-note,
+.visitor-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* VISITOR COUNTER */
+
+.visitor-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 26px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.visitor-icon {
+  display: flex;
+  flex: 0 0 42px;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 9px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.visitor-card strong {
+  display: block;
+  color: var(--heading);
+  font-size: 14px;
+}
+
+.visitor-card p {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.visitor-note {
+  margin-top: 10px;
+}
+
+/* 13. ENQUIRY FORM */
 
 .contact-form {
-    padding: 30px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--white);
-    box-shadow: var(--shadow-md);
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-form h3 {
+  margin-bottom: 8px;
+  font-size: 25px;
 }
 
 .form-description {
-    margin-bottom: 24px;
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.8;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .form-field {
-    display: flex;
-    min-width: 0;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .form-field-full {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 }
 
 .form-field label {
-    color: var(--heading);
-    font-size: 13px;
-    font-weight: 700;
+  color: var(--heading);
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .form-field input,
 .form-field select,
 .form-field textarea {
-    width: 100%;
-    min-width: 0;
-    padding: 13px 14px;
-    border: 1px solid #d7dee8;
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    color: var(--heading);
-    font: inherit;
-    font-size: 14px;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 12px 13px;
+  border: 1px solid #d7dee8;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--heading);
+  font-family: var(--font-main);
+  font-size: 14px;
 }
 
 .form-field textarea {
-    min-height: 120px;
-    resize: vertical;
+  min-height: 120px;
+  resize: vertical;
 }
 
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-    outline: 2px solid #bfdbfe;
-    border-color: var(--primary);
+  outline: 2px solid #bfdbfe;
+  border-color: var(--primary);
 }
 
 .submit-button {
-    width: 100%;
-    margin-top: 22px;
+  width: 100%;
+  margin-top: 22px;
 }
 
 .form-note {
-    margin-top: 14px;
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.7;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
 }
 
-
-/* ========================================
-   FOOTER
-======================================== */
+/* 14. FOOTER */
 
 .site-footer {
-    background: #f1f5f9;
-    border-top: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  background: #f1f5f9;
 }
 
 .footer-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 32px;
-    padding-top: 42px;
-    padding-bottom: 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  padding-top: 42px;
+  padding-bottom: 32px;
 }
 
-.footer-brand {
-    max-width: 390px;
-}
-
-.footer-brand p {
-    margin-top: 12px;
-    color: var(--text);
-    font-size: 14px;
-    line-height: 1.8;
+.footer-main > p {
+  max-width: 320px;
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
 }
 
 .footer-links a {
-    color: var(--text);
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .footer-links a:hover {
-    color: var(--primary);
+  color: var(--primary);
 }
 
 .footer-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    border-top: 1px solid var(--border);
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid var(--border);
 }
 
+.footer-bottom p,
+.footer-bottom a {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
 
-/* ========================================
-   MOBILE RESPONSIVE LAYOUT
-======================================== */
+.footer-bottom a:hover {
+  color: var(--primary);
+}
+
+/* 15. TABLET RESPONSIVE */
 
 @media (max-width: 960px) {
-    .contact-layout {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
+  .navbar {
+    gap: 18px;
+  }
 
-    .contact-copy {
-        max-width: 650px;
-    }
+  .nav-links {
+    gap: 15px;
+  }
+
+  .nav-links > a:not(.button) {
+    font-size: 12px;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    gap: 28px;
+  }
+
+  .hero-visual {
+    padding: 18px;
+  }
+
+  .about-layout {
+    gap: 36px;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .contact-copy {
+    max-width: 680px;
+  }
 }
+
+/* 16. MOBILE NAVIGATION + LAYOUT */
 
 @media (max-width: 680px) {
-    .container {
-        width: min(100% - 32px, var(--container));
-    }
+  .container {
+    width: calc(100% - 32px);
+  }
 
-    .section {
-        padding-top: 66px;
-        padding-bottom: 66px;
-    }
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
 
-    .section-heading {
-        font-size: clamp(28px, 8vw, 36px);
-    }
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 30px;
+  }
 
-    .navbar {
-        min-height: 70px;
-    }
+  .section-heading h2 {
+    font-size: clamp(28px, 8vw, 36px);
+  }
 
-    .brand-text {
-        font-size: 18px;
-    }
+  .section-heading > p {
+    max-width: 100%;
+  }
 
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 12px 20px 20px;
-        border-bottom: 1px solid var(--border);
-        background: var(--white);
-    }
+  /* MOBILE HEADER */
 
-    .nav-links.open {
-        display: flex;
-    }
+  .navbar {
+    min-height: 70px;
+  }
 
-    .nav-links a {
-        display: block;
-        padding: 13px 8px;
-    }
+  .brand {
+    gap: 9px;
+  }
 
-    .nav-links .nav-cta {
-        margin-top: 8px;
-        text-align: center;
-    }
+  .brand-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 23px;
+  }
 
-    .menu-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
+  .brand-text strong {
+    font-size: 15px;
+  }
 
-    .hero {
-        padding-top: 58px;
-        padding-bottom: 64px;
-    }
+  .brand-text small {
+    font-size: 9px;
+  }
 
-    .hero-content h1 {
-        font-size: clamp(36px, 10vw, 48px);
-    }
+  .menu-toggle {
+    display: inline-flex;
+    flex-shrink: 0;
+  }
 
-    .hero-description {
-        font-size: 15px;
-    }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    right: -16px;
+    z-index: 200;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px 16px 18px;
+    border: 1px solid var(--border);
+    border-top: 0;
+    background: var(--white);
+  }
 
-    .hero-actions {
-        align-items: stretch;
-        flex-direction: column;
-    }
+  .nav-links.open {
+    display: flex;
+  }
 
-    .hero-actions .button {
-        width: 100%;
-    }
+  .nav-links > a:not(.button) {
+    display: flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 11px 8px;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f5f9;
+  }
 
-    .hero-stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-    }
+  .nav-links .nav-cta {
+    display: flex;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 12px;
+    padding: 12px;
+    text-align: center;
+  }
 
-    .stat-item strong {
-        font-size: 21px;
-    }
+  /* MOBILE HERO */
 
-    .stat-item span {
-        font-size: 11px;
-    }
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    min-height: auto;
+    padding-top: 54px;
+    padding-bottom: 60px;
+  }
 
-    .hero-visual {
-        margin-top: 12px;
-    }
+  .hero-content h1 {
+    font-size: clamp(36px, 10vw, 48px);
+  }
 
-    .mock-browser {
-        padding: 14px;
-    }
+  .hero-description {
+    font-size: 15px;
+    line-height: 1.8;
+  }
 
-    .mock-heading {
-        font-size: 24px;
-    }
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
 
-    .about-layout {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+  .hero-actions .button {
+    width: 100%;
+  }
 
-    .service-grid,
-    .project-grid,
-    .pricing-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
+  .hero-stats {
+    gap: 10px;
+    margin-top: 32px;
+  }
 
-    .service-card,
-    .price-card {
-        padding: 24px;
-    }
+  .stat-item strong {
+    font-size: 11px;
+  }
 
-    .project-preview {
-        min-height: 165px;
-    }
+  .stat-item span {
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
 
-    .project-content {
-        padding: 20px;
-    }
+  .hero-visual {
+    width: 100%;
+    padding: 15px;
+  }
 
-    .contact-form {
-        padding: 22px 18px;
-    }
+  .browser-content {
+    min-height: 0;
+    padding: 23px 16px;
+  }
 
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
+  .mock-heading {
+    font-size: 25px;
+  }
 
-    .form-field-full {
-        grid-column: auto;
-    }
+  /* MOBILE CONTENT GRIDS */
 
-    .footer-main {
-        flex-direction: column;
-        gap: 24px;
-    }
+  .about-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
 
-    .footer-links {
-        gap: 14px;
-    }
+  .service-grid,
+  .project-grid,
+  .pricing-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+  }
 
-    .footer-bottom {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 8px;
-    }
+  .service-card,
+  .price-card {
+    padding: 24px;
+  }
+
+  .project-preview {
+    min-height: 165px;
+  }
+
+  /* MOBILE CONTACT BUTTONS */
+
+  .contact-action-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .contact-action {
+    min-height: 74px;
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .action-icon {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .contact-action strong {
+    font-size: 12px;
+  }
+
+  .contact-action small {
+    font-size: 10px;
+  }
+
+  .contact-form {
+    padding: 22px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .form-field-full {
+    grid-column: auto;
+  }
+
+  /* MOBILE FOOTER */
+
+  .footer-main {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .footer-links {
+    gap: 12px 18px;
+  }
+
+  .footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
-
-/* ========================================
-   SMALL PHONE ADJUSTMENTS
-======================================== */
+/* 17. SMALL PHONE FIXES */
 
 @media (max-width: 380px) {
-    .container {
-        width: calc(100% - 24px);
-    }
+  .container {
+    width: calc(100% - 24px);
+  }
 
-    .hero-content h1 {
-        font-size: 33px;
-    }
+  .hero-content h1 {
+    font-size: 34px;
+  }
 
-    .hero-stats {
-        gap: 7px;
-    }
+  .hero-stats {
+    gap: 7px;
+  }
 
-    .stat-item strong {
-        font-size: 18px;
-    }
+  .stat-item strong {
+    font-size: 10px;
+  }
 
-    .contact-form {
-        padding: 18px 14px;
-    }
-   }
-   
+  .hero-visual {
+    padding: 10px;
+  }
+
+  .mock-cards {
+    gap: 5px;
+  }
+
+  .contact-action-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-action {
+    min-height: 66px;
+    padding: 12px;
+  }
+
+  .contact-form {
+    padding: 18px 14px;
+  }
+
+  .price-card {
+    padding: 20px;
+  }
+     }
+     
