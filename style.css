@@ -816,7 +816,55 @@ p {
 .preview-destini {
   background: #f0f0f2;
 }
+/* =========================================================
+   MOBILE HAMBURGER MENU — FIX
+   ========================================================= */
 
+@media (max-width: 680px) {
+
+  .menu-toggle {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    display: block;
+    flex: 0 0 44px;
+    padding: 0;
+    border: 1px solid #e1e4e8;
+    border-radius: 13px;
+    background: #ffffff;
+    color: transparent;
+    font-size: 0;
+    overflow: hidden;
+  }
+
+  /* Three clean hamburger lines */
+  .menu-toggle::before {
+    content: "";
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    width: 20px;
+    height: 2px;
+    border-radius: 10px;
+    background: #0d0f12;
+    box-shadow:
+      0 7px 0 #0d0f12,
+      0 14px 0 #0d0f12;
+  }
+
+  .menu-toggle::after {
+    display: none;
+    content: "";
+  }
+
+  .menu-toggle:hover {
+    background: #f7f8fa;
+  }
+
+  .menu-toggle:active {
+    transform: scale(.96);
+  }
+}
 /* ---------- PROCESS ---------- */
 
 .process-grid {
